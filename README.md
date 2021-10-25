@@ -1,4 +1,4 @@
-Display HAT Mini
+# Display HAT Mini
 
 [![Build Status](https://travis-ci.com/pimoroni/displayhatmini-python.svg?branch=main)](https://travis-ci.com/pimoroni/displayhatmini-python)
 [![Coverage Status](https://coveralls.io/repos/github/pimoroni/displayhatmini-python/badge.svg?branch=main)](https://coveralls.io/github/pimoroni/displayhatmini-python?branch=main)
