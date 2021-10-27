@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw
 
 __version__ = '0.0.1'
 
+
 class DisplayHATMini():
     # User buttons
     BUTTON_A = 5
@@ -112,21 +113,21 @@ if __name__ == "__main__":
 
         if displayhatmini.read_button(displayhatmini.BUTTON_B):
             displayhatmini.set_led(0.0, 0.0, 1.0)
-            draw.rectangle((0, height-50, 50, height), (192, 192, 255))
+            draw.rectangle((0, height - 50, 50, height), (192, 192, 255))
         else:
-            draw.rectangle((0, height-50, 50, height), (0, 0, 255))
+            draw.rectangle((0, height - 50, 50, height), (0, 0, 255))
 
         if displayhatmini.read_button(displayhatmini.BUTTON_X):
             displayhatmini.set_led(0.0, 1.0, 0.0)
-            draw.rectangle((width-50, 0, width, 50), (192, 255, 192))
+            draw.rectangle((width - 50, 0, width, 50), (192, 255, 192))
         else:
-            draw.rectangle((width-50, 0, width, 50), (0, 255, 0))            
+            draw.rectangle((width - 50, 0, width, 50), (0, 255, 0))
 
         if displayhatmini.read_button(displayhatmini.BUTTON_Y):
             displayhatmini.set_led(1.0, 1.0, 0.0)
-            draw.rectangle((width-50, height-50, width, height), (255, 255, 192))
+            draw.rectangle((width - 50, height - 50, width, height), (255, 255, 192))
         else:
-            draw.rectangle((width-50, height-50, width, height), (255, 255, 0))
+            draw.rectangle((width - 50, height - 50, width, height), (255, 255, 0))
 
         displayhatmini.display()
         time.sleep(0.01)
