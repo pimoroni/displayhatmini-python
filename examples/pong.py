@@ -5,8 +5,15 @@ import math
 from displayhatmini import DisplayHATMini
 from collections import namedtuple
 from turtle import Vec2D
-from PIL import Image, ImageDraw, ImageFont
 
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ImportError:
+    print("""This example requires PIL/Pillow, try:
+
+sudo apt install python3-pil
+
+""")
 
 width = DisplayHATMini.WIDTH
 height = DisplayHATMini.HEIGHT
