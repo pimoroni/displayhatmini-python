@@ -7,7 +7,7 @@
 
 # Pre-requisites
 
-You must enable (delete where appropriate):
+You must enable:
 
 * spi: `sudo raspi-config nonint do_spi 0`
 
