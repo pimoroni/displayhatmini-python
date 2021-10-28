@@ -92,18 +92,18 @@ class Ball():
         dist_x = abs(self.x - rx)
         dist_y = abs(self.y - ry)
 
-        if dist_x > rw/2.0+self.radius or dist_y > rh/2.0+self.radius:
+        if dist_x > rw / 2.0 + self.radius or dist_y > rh / 2.0 + self.radius:
             return False
 
-        if dist_x <= rw/2.0 or dist_y <= rh/2.0:
+        if dist_x <= rw / 2.0 or dist_y <= rh / 2.0:
             return True
 
-        cx = dist_x-rw/2.0
-        cy = dist_y-rh/2.0
+        cx = dist_x - rw / 2.0
+        cy = dist_y - rh / 2.0
 
-        c_sq = cx**2.0 + cy**2.0
+        c_sq = cx ** 2.0 + cy ** 2.0
 
-        return c_sq <= self.radius**2.0
+        return c_sq <= self.radius ** 2.0
 
     def update(self, delta, left_player, right_player):
         global width
@@ -119,11 +119,11 @@ class Ball():
                     w, h = item.size
                     relative_y = (cy - self.y) / (h / 2)
 
-                    speed = self.speed + (abs(relative_y)/4)
+                    speed = self.speed + (abs(relative_y) / 4)
 
                     angle = relative_y * 5 * (math.pi / 12)
 
-                    if self.x > width/2:
+                    if self.x > width / 2:
                         self.x = item.position.x - self.radius
                         self.velocity = Vec2D(
                             speed * -math.cos(angle),
@@ -193,8 +193,8 @@ class Player():
     @property
     def position(self):
         return Position(
-            x=self.x - (self.width/2),
-            y=self.y - (self.height/2))
+            x=self.x - (self.width / 2),
+            y=self.y - (self.height / 2))
 
     @property
     def size(self):
@@ -218,8 +218,8 @@ ball = Ball()
 
 time_last = millis()
 
-player_one_pos = height/2
-player_two_pos = height/2
+player_one_pos = height / 2
+player_two_pos = height / 2
 
 displayhatmini.set_led(0, 0, 0)
 
