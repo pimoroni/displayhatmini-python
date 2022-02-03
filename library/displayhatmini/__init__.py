@@ -27,7 +27,7 @@ class DisplayHATMini():
     WIDTH = 320
     HEIGHT = 240
 
-    def __init__(self, buffer):
+    def __init__(self, buffer, backlight_pwm=False):
         """Initialise displayhatmini
         """
 
@@ -55,11 +55,18 @@ class DisplayHATMini():
         self.led_b_pwm = GPIO.PWM(self.LED_B, 2000)
         self.led_b_pwm.start(100)
 
+        if backlight_pwm:
+            GPIO.setup(self.BACKLIGHT, GPIO.OUT)
+            self.backlight_pwm = GPIO.PWM(self.BACKLIGHT, 500)
+            self.backlight_pwm.start(100)
+        else:
+            self.backlight_pwm = None
+
         self.st7789 = ST7789(
             port=self.SPI_PORT,
             cs=self.SPI_CS,
             dc=self.SPI_DC,
-            backlight=self.BACKLIGHT,
+            backlight=None if backlight_pwm else self.BACKLIGHT,
             width=self.WIDTH,
             height=self.HEIGHT,
             rotation=180,
@@ -80,6 +87,12 @@ class DisplayHATMini():
             self.led_r_pwm.ChangeDutyCycle((1.0 - r) * 100)
             self.led_g_pwm.ChangeDutyCycle((1.0 - g) * 100)
             self.led_b_pwm.ChangeDutyCycle((1.0 - b) * 100)
+
+    def set_backlight(self, value):
+        if self.backlight_pwm is not None:
+            self.backlight_pwm.ChangeDutyCycle(value * 100)
+        else:
+            self.st7789.set_backlight(int(value))
 
     def on_button_pressed(self, callback):
         for pin in (self.BUTTON_A, self.BUTTON_B, self.BUTTON_X, self.BUTTON_Y):
