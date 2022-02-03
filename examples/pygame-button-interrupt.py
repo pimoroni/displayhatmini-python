@@ -7,7 +7,8 @@ import time
 import math
 from threading import Lock
 
-from displayhatmini import DisplayHATMini, GPIO
+from displayhatmini import DisplayHATMini
+
 
 print("""Display HAT Mini: Basic Pygame Demo""")
 
