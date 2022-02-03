@@ -12,6 +12,10 @@ from displayhatmini import DisplayHATMini
 
 print("""Display HAT Mini: Pygame Demo""")
 
+if pygame.vernum < (2, 0, 0):
+    print("Need PyGame >= 2.0.0:\n    python3 -m pip install pygame --upgrade")
+    sys.exit(1)
+
 
 hue_to_rgb = []
 

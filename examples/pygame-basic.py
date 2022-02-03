@@ -10,6 +10,10 @@ from displayhatmini import DisplayHATMini
 
 print("""Display HAT Mini: Basic Pygame Demo""")
 
+if pygame.vernum < (2, 0, 0):
+    print("Need PyGame >= 2.0.0:\n    python3 -m pip install pygame --upgrade")
+    sys.exit(1)
+
 
 def _exit(sig, frame):
     global running
