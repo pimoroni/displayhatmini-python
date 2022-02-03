@@ -81,6 +81,10 @@ class DisplayHATMini():
             self.led_g_pwm.ChangeDutyCycle((1.0 - g) * 100)
             self.led_b_pwm.ChangeDutyCycle((1.0 - b) * 100)
 
+    def on_button_pressed(self, callback):
+        for pin in (self.BUTTON_A, self.BUTTON_B, self.BUTTON_X, self.BUTTON_Y):
+            GPIO.add_event_detect(pin, GPIO.BOTH, callback=callback)
+
     def read_button(self, pin):
         return not GPIO.input(pin)
 
