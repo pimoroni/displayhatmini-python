@@ -5,8 +5,10 @@ import signal
 import pygame
 import time
 import math
+from threading import Lock
 
 from displayhatmini import DisplayHATMini
+
 
 print("""Display HAT Mini: Basic Pygame Demo""")
 
@@ -34,12 +36,28 @@ def update_display():
 
 
 display_hat = DisplayHATMini(None)
+event_lock = Lock()
 
 os.putenv('SDL_VIDEODRIVER', 'dummy')
 pygame.display.init()  # Need to init for .convert() to work
 screen = pygame.Surface((display_hat.WIDTH, display_hat.HEIGHT))
 
 signal.signal(signal.SIGINT, _exit)
+
+
+# Plumbing to convert Display HAT Mini button presses into pygame events
+def button_callback(pin):
+    key = {
+        display_hat.BUTTON_A: 'a',
+        display_hat.BUTTON_B: 'b',
+        display_hat.BUTTON_X: 'x',
+        display_hat.BUTTON_Y: 'y'
+    }[pin]
+    event = pygame.KEYDOWN if display_hat.read_button(pin) else pygame.KEYUP
+    pygame.event.post(pygame.event.Event(event, unicode=key, key=pygame.key.key_code(key)))
+
+
+display_hat.on_button_pressed(button_callback)
 
 running = True
 
@@ -49,7 +67,7 @@ while running:
             running = False
             break
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+            if event.key in (pygame.K_a, pygame.K_ESCAPE):
                 running = False
                 break
 
@@ -76,6 +94,9 @@ while running:
 
     update_display()
 
+
+screen.fill((0, 0, 0))
+update_display()
 
 pygame.quit()
 sys.exit(0)
