@@ -68,7 +68,7 @@ while running:
     y = math.cos(time.time()) * (display_hat.HEIGHT - r) / 2
     x += display_hat.WIDTH // 2
     y += display_hat.HEIGHT // 2
-    pygame.draw.circle(screen, (0, 0, 0), (x, y), r)
+    pygame.draw.circle(screen, (0, 0, 0), (int(x), int(y)), r)
 
     update_display()
 
