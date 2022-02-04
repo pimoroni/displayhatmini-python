@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from ST7789 import ST7789
 
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 
 class DisplayHATMini():
