@@ -11,7 +11,7 @@ try:
 except ImportError:
     print("""This example requires PIL/Pillow, try:
 
-sudo apt install python3-pil
+python3 -m pip install pillow --upgrade
 
 """)
 
