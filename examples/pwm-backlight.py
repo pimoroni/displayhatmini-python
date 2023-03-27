@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys
 import time
 from displayhatmini import DisplayHATMini
 
@@ -10,6 +11,7 @@ except ImportError:
 python3 -m pip install pillow --upgrade
 
 """)
+    sys.exit(1)
 
 width = DisplayHATMini.WIDTH
 height = DisplayHATMini.HEIGHT
