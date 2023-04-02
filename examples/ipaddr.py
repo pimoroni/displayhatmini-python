@@ -1,3 +1,4 @@
+import subprocess
 import time
 from datetime import datetime, timezone
 from threading import Timer
@@ -53,6 +54,19 @@ def display_time():
     Timer(0.5, display_time).start()
 
 
+def display_uptime():
+    uptime = subprocess.run(
+        "uptime", stdout=subprocess.PIPE
+    ).stdout.decode("utf-8").strip()
+
+    idx = uptime.index("load")
+
+    draw.rectangle(xy=(0, height-30, (width * 2) // 3, height), fill=(0, 0, 0))
+    draw.text(xy=(0, height-30), text=uptime[:idx], fill=(255, 255, 255), font=font)
+    draw.text(xy=(0, height-15), text=uptime[idx:], fill=(255, 255, 255), font=font)
+    Timer(0.5, display_uptime).start()
+
+
 def button_callback(pin):
     if not displayhatmini.read_button(pin):
         return
@@ -64,6 +78,7 @@ displayhatmini.on_button_pressed(button_callback)
 displayhatmini.set_backlight(1.0)
 display_ip()
 display_time()
+display_uptime()
 
 while True:
     displayhatmini.display()
