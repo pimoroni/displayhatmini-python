@@ -64,7 +64,7 @@ def display_uptime():
     draw.rectangle(xy=(0, height-30, (width * 2) // 3, height), fill=(0, 0, 0))
     draw.text(xy=(0, height-30), text=uptime[:idx], fill=(255, 255, 255), font=font)
     draw.text(xy=(0, height-15), text=uptime[idx:], fill=(255, 255, 255), font=font)
-    Timer(0.5, display_uptime).start()
+    Timer(15, display_uptime).start()
 
 
 def button_callback(pin):
