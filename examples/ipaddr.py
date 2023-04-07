@@ -32,39 +32,42 @@ def display_ip():
     print("\n".join(ip_str_lines))
 
     y = 20
+    draw.rectangle(xy=(0, 0, width, 100), fill=(0, 0, 0))
     for line in ip_str_lines:
-        draw.text(
-            xy=(10, y), text=line, fill=(255, 255, 255), font=font
-        )
+        draw.text(xy=(10, y), text=line, fill=(255, 255, 255), font=font)
         y += 20
 
 
 def display_time():
-    timestr = datetime.now(tz=timezone.utc).astimezone().strftime("%H:%M:%S")
-    draw.rectangle(
-        xy=(0, height // 2 - 20, width, height // 2 + 10),
-        fill=(0, 0, 0),
-    )
-    draw.text(
-        xy=((width - font.getlength(timestr)) // 2, height // 2),
-        text=timestr,
-        fill=(255, 255, 255),
-        font=font,
-    )
-    Timer(0.5, display_time).start()
+    try:
+        timestr = datetime.now(tz=timezone.utc).astimezone().strftime("%H:%M:%S")
+        draw.rectangle(
+            xy=(0, height // 2 - 20, width, height // 2 + 10),
+            fill=(0, 0, 0),
+        )
+        draw.text(
+            xy=((width - font.getlength(timestr)) // 2, height // 2),
+            text=timestr,
+            fill=(255, 255, 255),
+            font=font,
+        )
+    finally:
+        Timer(0.5, display_time).start()
 
 
 def display_uptime():
-    uptime = subprocess.run(
-        "uptime", stdout=subprocess.PIPE
-    ).stdout.decode("utf-8").strip()
+    try:
+        uptime = subprocess.run(
+            "uptime", stdout=subprocess.PIPE
+        ).stdout.decode("utf-8").strip()
 
-    idx = uptime.index("load")
+        idx = uptime.index("load")
 
-    draw.rectangle(xy=(0, height-30, (width * 2) // 3, height), fill=(0, 0, 0))
-    draw.text(xy=(0, height-30), text=uptime[:idx], fill=(255, 255, 255), font=font)
-    draw.text(xy=(0, height-15), text=uptime[idx:], fill=(255, 255, 255), font=font)
-    Timer(15, display_uptime).start()
+        draw.rectangle(xy=(0, height-30, (width * 2) // 3, height), fill=(0, 0, 0))
+        draw.text(xy=(0, height-30), text=uptime[:idx], fill=(255, 255, 255), font=font)
+        draw.text(xy=(0, height-15), text=uptime[idx:], fill=(255, 255, 255), font=font)
+    finally:
+        Timer(15, display_uptime).start()
 
 
 def button_callback(pin):
