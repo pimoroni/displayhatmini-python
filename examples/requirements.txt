@@ -1,0 +1,6 @@
+displayhatmini>=0.0.2
+numpy>=1.24.2
+Pillow>=9.4.0
+pygame>=2.0.0
+spidev>=3.6
+ST7789>=0.0.4
