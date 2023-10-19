@@ -1,0 +1,103 @@
+[build-system]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[project]
+name = "displayhatmini"
+dynamic = ["version", "readme"]
+authors = [{name = "Philip Howard", email = "phil@pimoroni.com"}]
+description = "Python library for the displayhatmini 320x240 LCD with buttons and RGB"
+keywords = ["Raspberry Pi"]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: POSIX :: Linux",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Hardware",
+]
+requires-python = ">= 3.7"
+dependencies = [
+    "st7789 >= 0.0.4",
+    "RPi.GPIO",
+]
+
+[project.urls]
+Homepage = "https://www.pimoroni.com"
+GitHub = "https://www.github.com/pimoroni/displayhatmini-python"
+
+[tool.hatch.version]
+path = "displayhatmini/__init__.py"
+
+[tool.hatch.build]
+include = [
+    "displayhatmini",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "*"
+]
+exclude = [
+    ".*",
+    "dist"
+]
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+fragments = [
+  { path = "README.md" },
+  { text = "\n" },
+  { path = "CHANGELOG.md" }
+]
+
+[tool.ruff]
+exclude = [
+    '.tox',
+    '.egg',
+    '.git',
+    '__pycache__',
+    'build',
+    'dist'
+]
+line-length = 200
+
+[tool.codespell]
+skip = """
+./.tox,\
+./.egg,\
+./.git,\
+./__pycache__,\
+./build,\
+./dist.\
+"""
+
+[tool.isort]
+line_length = 200
+
+[tool.check-manifest]
+ignore = [
+    '.stickler.yml',
+    'boilerplate.md',
+    'check.sh',
+    'install.sh',
+    'uninstall.sh',
+    'Makefile',
+    'tox.ini',
+    'tests/*',
+    'examples/*',
+    '.coveragerc',
+    'requirements-dev.txt'
+]
+
+[tool.pimoroni]
+configtxt = ""
+commands = ""
+apt_packages = ""
