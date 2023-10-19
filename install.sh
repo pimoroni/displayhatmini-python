@@ -5,14 +5,15 @@ DATESTAMP=`date "+%Y-%m-%d-%H-%M-%S"`
 CONFIG_BACKUP=false
 APT_HAS_UPDATED=false
 RESOURCES_TOP_DIR=$HOME/Pimoroni
-VENV_BASH_SNIPPET=$RESOURCES_TOP_DIR/auto_venv.sh
-VENV_DIR=$RESOURCES_TOP_DIR/venv
+VENV_BASH_SNIPPET=$RESOURCES_DIR/auto_venv.sh
+VENV_DIR=$HOME/.virtualenvs/pimoroni
 WD=`pwd`
 USAGE="./install.sh (--unstable)"
 POSITIONAL_ARGS=()
 FORCE=false
 UNSTABLE=false
 PYTHON="python"
+
 
 user_check() {
 	if [ $(id -u) -eq 0 ]; then
@@ -58,16 +59,16 @@ warning() {
 venv_bash_snippet() {
 	if [ ! -f $VENV_BASH_SNIPPET ]; then
 		cat << EOF > $VENV_BASH_SNIPPET
-# Add \`source $RESOURCES_TOP_DIR/auto_venv.sh\` to your ~/.bashrc to activate
+# Add `source $RESOURCES_DIR/auto_venv.sh` to your ~/.bashrc to activate
 # the Pimoroni virtual environment automagically!
-PY_ENV_DIR=~/Pimoroni/venv
-if [ ! -f \$PY_ENV_DIR/bin/activate ]; then
-  printf "Creating user Python environment in \$PY_ENV_DIR, please wait...\n"
-  mkdir -p \$PY_ENV_DIR
-  python3 -m venv --system-site-packages --prompt Pimoroni \$PY_ENV_DIR
+VENV_DIR="$VENV_DIR"
+if [ ! -f \$VENV_DIR/bin/activate ]; then
+  printf "Creating user Python environment in \$VENV_DIR, please wait...\n"
+  mkdir -p \$VENV_DIR
+  python3 -m venv --system-site-packages \$VENV_DIR
 fi
 printf " ↓ ↓ ↓ ↓   Hello, we've activated a Python venv for you. To exit, type \"deactivate\".\n"
-source \$PY_ENV_DIR/bin/activate
+source \$VENV_DIR/bin/activate
 EOF
 	fi
 }
@@ -80,7 +81,7 @@ venv_check() {
 			if [ ! -f $VENV_DIR/bin/activate ]; then
 				inform "Creating virtual Python environment in $VENV_DIR, please wait...\n"
 				mkdir -p $VENV_DIR
-				/usr/bin/python3 -m venv $VENV_DIR --system-site-packages --prompt Pimoroni
+				/usr/bin/python3 -m venv $VENV_DIR --system-site-packages
 				venv_bash_snippet
 			else
 				inform "Found existing virtual Python environment in $VENV_DIR\n"
