@@ -1,7 +1,8 @@
 import time
-from PIL import Image, ImageDraw
-from . import DisplayHATMini
 
+from PIL import Image, ImageDraw
+
+from . import DisplayHATMini
 
 print("""DisplayHATMini Function Test
 

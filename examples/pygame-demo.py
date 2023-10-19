@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-import os
-import sys
-import signal
-import pygame
-import time
 import colorsys
 import math
+import os
+import signal
+import sys
+import time
+
+import pygame
 
 from displayhatmini import DisplayHATMini
-
 
 print("""Display HAT Mini: Pygame Demo""")
 
