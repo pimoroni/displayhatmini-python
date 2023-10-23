@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+import math
 import random
 import time
-import math
-from displayhatmini import DisplayHATMini
 from collections import namedtuple
 from turtle import Vec2D
+
+from displayhatmini import DisplayHATMini
 
 try:
     from PIL import Image, ImageDraw, ImageFont

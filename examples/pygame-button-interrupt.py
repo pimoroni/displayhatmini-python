@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-import os
-import sys
-import signal
-import pygame
-import time
 import math
+import os
+import signal
+import sys
+import time
 from threading import Lock
 
-from displayhatmini import DisplayHATMini
+import pygame
 
+from displayhatmini import DisplayHATMini
 
 print("""Display HAT Mini: Basic Pygame Demo""")
 
